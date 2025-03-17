@@ -77,3 +77,22 @@ body {
     padding: 600px;
     color: red;
 }
+
+#dev {
+    color: white;
+    line-height: 1.6;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#firstpage {
+    text-align: center;
+    color: white;
+}
+
+#discord {
+    display: block;
+    text-align: center;
+    color: white;
+}
