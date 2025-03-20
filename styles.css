@@ -27,7 +27,7 @@
 }
 
 body {
-    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #141e30);
+
     background-size: 400% 400%;
     animation: sexyGradient 10s ease-in-out infinite;
     height: 100vh;
@@ -35,7 +35,92 @@ body {
 }
 
 
-@keyframes textColorFade {
+/* Modern Dark Animated Background with Enhanced Animation */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #222, #111);
+    background-size: 400% 400%;
+    animation: gradientBG 6s ease-in-out infinite;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating Particles with More Motion */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-50vh) scale(1.2);
+    }
+
+    75% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Generate Particles Dynamically */
+<script>document.addEventListener("DOMContentLoaded", function() {
+        const particleContainer=document.createElement("div");
+        particleContainer.classList.add("particles");
+        document.body.appendChild(particleContainer);
+
+        for (let i=0; i < 80; i++) {
+            let particle=document.createElement("div");
+            particle.classList.add("particle");
+            particle.style.left=Math.random() * 100 + "vw";
+            particle.style.animationDelay=Math.random() * 3 + "s";
+            particle.style.animationDuration=2 + Math.random() * 3 + "s";
+            particleContainer.appendChild(particle);
+        }
+    });
+
+</script>@keyframes textColorFade {
     20% {
         color: rgb(2, 124, 247);
     }
@@ -74,7 +159,6 @@ body {
 
 #footer {
     text-align: center;
-    padding: 600px;
     color: red;
 }
 
@@ -83,7 +167,6 @@ body {
     line-height: 1.6;
     width: 50%;
     margin: 0 auto;
-    text-align: center;
 }
 
 #firstpage {
@@ -101,3 +184,7 @@ body {
     text-align: center;
     color: white;
 }
+
+
+
+/* Style buttons */

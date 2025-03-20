@@ -14,6 +14,7 @@
 <body>
 
 
+
     <h1 id="huvetext">Svensken Portfolio</h1>
     <br>
     <br>
@@ -59,11 +60,183 @@
     </p>
     <h4 id="firstpage">This is my first ever page</h4>
     <br>
+
     <a id="discord" href="https://discord.gg/xjkAemw2WJ" target="_blank">Join My Discord Server</a>
     <p id="mjay">Thanks to Mjay for being a very good teacher.</p>
 
+    </head>
 
-</body>
+    <body>
+        <button class="chat-button" id="chatButton">Open Chat</button>
+        <div class="container" id="chatBox">
+            <div class="nav-bar">
+                <a>Chat</a>
+                <span class="close" id="closeChat">&times;</span>
+            </div>
+            <div class="messages-area" id="messages"></div>
+            <div class="sender-area">
+                <input class="send-input" id="messageInput" placeholder="Send a message..." type="text">
+                <div class="send" id="sendMessage">&#9658;</div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let chatButton = document.getElementById("chatButton");
+            let chatBox = document.getElementById("chatBox");
+            let closeChat = document.getElementById("closeChat");
+            let sendMessage = document.getElementById("sendMessage");
+            let messageInput = document.getElementById("messageInput");
+            let messagesArea = document.getElementById("messages");
+            let webhookURL = "https://discord.com/api/webhooks/1352387856693461103/J50kh90jvlqFLG9k9ZvvlZU2tXHKFFuFAu0yOFDD0a9RzpR00QAHlRH24b8g2rfyhcBU";
+
+            chatButton.addEventListener("click", function () {
+                chatBox.style.display = "flex";
+                chatButton.style.display = "none";
+            });
+
+            closeChat.addEventListener("click", function () {
+                chatBox.style.display = "none";
+                chatButton.style.display = "block";
+            });
+
+            function appendMessage(text, sender) {
+                let messageDiv = document.createElement("div");
+                messageDiv.classList.add("message");
+                messageDiv.textContent = sender + ": " + text;
+                messagesArea.appendChild(messageDiv);
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
+
+            function sendMessageToDiscord(message) {
+                fetch(webhookURL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ content: message })
+                });
+            }
+
+            function handleSendMessage() {
+                let message = messageInput.value.trim();
+                if (message !== "") {
+                    appendMessage(message, "You");
+                    sendMessageToDiscord(message);
+                    messageInput.value = "";
+                }
+            }
+
+            sendMessage.addEventListener("click", handleSendMessage);
+            messageInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    handleSendMessage();
+                }
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #343541;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 300px;
+            height: 320px;
+            background-color: #343541;
+            border-radius: 8px;
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .nav-bar {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            background-color: #2E2F3A;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .nav-bar a {
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .close {
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+        }
+
+        .messages-area {
+            background-color: #1E1F26;
+            width: 100%;
+            height: 210px;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #2E2F3A;
+        }
+
+        .message {
+            background: #40414F;
+            color: white;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .sender-area {
+            background-color: #2E2F3A;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .send-input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: #40414F;
+            color: white;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .send {
+            cursor: pointer;
+            color: white;
+            padding: 8px;
+            margin-left: 5px;
+            background: #565869;
+            border-radius: 5px;
+        }
+    </style>
 
 
 </html>
